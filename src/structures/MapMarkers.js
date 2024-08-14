@@ -265,7 +265,7 @@ class MapMarkers {
         for (let marker of newMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
 
             marker.location = pos;
 
@@ -281,7 +281,7 @@ class MapMarkers {
         for (let marker of remainingMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
             let player = this.getMarkerByTypeId(this.types.Player, marker.id);
 
             player.x = marker.x;
@@ -299,7 +299,7 @@ class MapMarkers {
         for (let marker of newMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
 
             marker.location = pos;
 
@@ -326,7 +326,7 @@ class MapMarkers {
         for (let marker of remainingMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
             let vendingMachine = this.getMarkerByTypeXY(this.types.VendingMachine, marker.x, marker.y);
 
             vendingMachine.id = marker.id;
@@ -343,12 +343,12 @@ class MapMarkers {
         for (let marker of newMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
 
             marker.location = pos;
 
             let smallOilRig = [], largeOilRig = [];
-            for (let monument of this.rustplus.map.monuments) {
+            for (let monument of this.rustplus.rpMap.monuments) {
                 if (monument.token === 'oil_rig_small') {
                     smallOilRig.push({ x: monument.x, y: monument.y })
                 }
@@ -364,7 +364,7 @@ class MapMarkers {
                         Constants.OIL_RIG_CHINOOK_47_MAX_SPAWN_DISTANCE) {
                         found = true;
                         let oilRigLocation = Map.getPos(this.rustplus.generalSettings.language, oilRig.x, oilRig.y,
-                            mapSize, this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                            mapSize, this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
                         marker.ch47Type = 'smallOilRig';
 
                         this.rustplus.sendEvent(
@@ -400,7 +400,7 @@ class MapMarkers {
                         Constants.OIL_RIG_CHINOOK_47_MAX_SPAWN_DISTANCE) {
                         found = true;
                         let oilRigLocation = Map.getPos(this.rustplus.generalSettings.language, oilRig.x, oilRig.y,
-                            mapSize, this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                            mapSize, this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
                         marker.ch47Type = 'largeOilRig';
 
                         this.rustplus.sendEvent(
@@ -470,7 +470,7 @@ class MapMarkers {
         for (let marker of remainingMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
             let ch47 = this.getMarkerByTypeId(this.types.CH47, marker.id);
 
             ch47.x = marker.x;
@@ -488,7 +488,7 @@ class MapMarkers {
         for (let marker of newMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
 
             this.rustplus.cargoShipTracers[marker.id] = [{ x: marker.x, y: marker.y }];
 
@@ -548,13 +548,13 @@ class MapMarkers {
         for (let marker of remainingMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
             let cargoShip = this.getMarkerByTypeId(this.types.CargoShip, marker.id);
 
             this.rustplus.cargoShipTracers[marker.id].push({ x: marker.x, y: marker.y });
 
             const harbors = [];
-            for (const monument of this.rustplus.map.monuments) {
+            for (const monument of this.rustplus.rpMap.monuments) {
                 if (/harbor/.test(monument.token)) {
                     harbors.push({ x: monument.x, y: monument.y })
                 }
@@ -567,7 +567,7 @@ class MapMarkers {
                         if (marker.x === cargoShip.x && marker.y === cargoShip.y) {
                             /* CargoShip is now docked. */
                             const harborLocation = Map.getPos(this.rustplus.generalSettings.language, harbor.x,
-                                harbor.y, mapSize, this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                                harbor.y, mapSize, this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
                             cargoShip.isDocked = true;
                             this.rustplus.sendEvent(
                                 this.rustplus.notificationSettings.cargoShipDockingAtHarborSetting,
@@ -583,7 +583,7 @@ class MapMarkers {
                     if (Map.getDistance(marker.x, marker.y, harbor.x, harbor.y) <= Constants.HARBOR_DOCK_DISTANCE) {
                         if (marker.x !== cargoShip.x || marker.y !== cargoShip.y) {
                             const harborLocation = Map.getPos(this.rustplus.generalSettings.language, harbor.x,
-                                harbor.y, mapSize, this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                                harbor.y, mapSize, this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
                             cargoShip.isDocked = false;
                             this.rustplus.sendEvent(
                                 this.rustplus.notificationSettings.cargoShipDockingAtHarborSetting,
@@ -634,7 +634,7 @@ class MapMarkers {
         for (let marker of newMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
 
             this.rustplus.patrolHelicopterTracers[marker.id] = [{ x: marker.x, y: marker.y }];
 
@@ -704,7 +704,7 @@ class MapMarkers {
         for (let marker of remainingMarkers) {
             let mapSize = this.rustplus.rpInfo.correctedMapSize;
             let pos = Map.getPos(this.rustplus.generalSettings.language, marker.x, marker.y, mapSize,
-                this.rustplus.map.monuments, this.rustplus.map.monumentInfo);
+                this.rustplus.rpMap.monuments, this.rustplus.rpMap.monumentInfo);
             let patrolHelicopter = this.getMarkerByTypeId(this.types.PatrolHelicopter, marker.id);
 
             this.rustplus.patrolHelicopterTracers[marker.id].push({ x: marker.x, y: marker.y });
@@ -780,7 +780,7 @@ class MapMarkers {
     getClosestMonument(x, y) {
         let minDistance = 1000000;
         let closestMonument = null;
-        for (let monument of this.rustplus.map.monuments) {
+        for (let monument of this.rustplus.rpMap.monuments) {
             let distance = Map.getDistance(x, y, monument.x, monument.y);
             if (distance < minDistance && this.validCrateMonuments.includes(monument.token)) {
                 minDistance = distance;
